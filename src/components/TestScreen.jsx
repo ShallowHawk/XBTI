@@ -4,8 +4,7 @@ import { shuffle } from '../logic/scoring';
 export default function TestScreen({ caseData, onSubmit, onBack }) {
   const { questions, specialQuestions } = caseData;
   const [answers, setAnswers] = useState({});
-
-  const shuffledQuestions = useMemo(() => {
+  const [shuffledQuestions] = useState(() => {
     const shuffled = shuffle(questions);
     const insertIndex = Math.floor(Math.random() * shuffled.length) + 1;
     return [
@@ -13,7 +12,7 @@ export default function TestScreen({ caseData, onSubmit, onBack }) {
       specialQuestions[0],
       ...shuffled.slice(insertIndex)
     ];
-  }, [questions, specialQuestions]);
+  });
 
   const visibleQuestions = useMemo(() => {
     const visible = [...shuffledQuestions];
